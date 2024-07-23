@@ -1,0 +1,30 @@
+name: Update Repo
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  update-repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download zip file
+        run: |
+          curl -L -o tegbr-main.zip https://gitlab.com/mrndk/tegbr/-/archive/main/tegbr-main.zip
+          unzip tegbr-main.zip -d tegbr
+          rm -rf ./assets
+          mv tegbr/tegbr-main/* .
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add TEGBR/*.pdf
+          git commit -m "Initial commit"
+          git push

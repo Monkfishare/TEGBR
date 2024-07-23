@@ -1,0 +1,78 @@
+h1 { 
+    font-family: "MiloTE", "SimSun", sans-serif;
+	font-size: 22px; 
+	margin-top: 3pt; 
+	margin-bottom: 3pt; 
+}
+
+h2 { 
+	font-family: "MiloTE", "SimSun", sans-serif;
+    font-size: 18px;
+	color: #e3120b;
+	margin-top: 0pt;
+	margin-bottom: 6pt;
+}
+
+h3 { 
+	font-family: "MiloTE", "SimSun", sans-serif;
+    font-size: 18px;
+	margin-bottom: 8pt;
+	font-style: italic;
+}
+
+h4 { 
+	font-family: "MiloTE", "SimSun", sans-serif;
+	font-size: 18px;
+	margin-top: 4pt; 
+	margin-bottom: 4pt; 
+	margin-left: 0.8rem;
+	border-left: 2px solid #333;
+    padding-left: 10px;
+    color: #555;
+	font-style: italic;
+}
+
+a {
+	font-family: "Segoe UI Symbol", sans-serif;
+	display: block;
+	text-align: right;
+	text-decoration: none;
+	margin-top: 0;
+	font-size: 25px;
+	color: #FF6C90;
+}
+
+span {
+    color: #e3120b;
+}  
+
+p {
+    font-family: "MiloTE", "SimSun", sans-serif;
+	font-size: 20.25px;
+    margin: 0;
+	line-height:140%;
+    padding:10px;
+}
+
+@font-face {
+    font-family: 'MiloTE';
+    src: url('fonts/MiloTE.woff2') format('woff2'),
+         url('fonts/MiloTE-ita.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'SimSun';
+    src: url('fonts/SimSun.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Segoe UI Symbol';
+    src: url('fonts/seguisym.woff2') format('woff2');
+}
+
+/* @page {
+	size: A4;
+	margin-top: 1cm;
+	margin-bottom: 1cm;
+	background-color: #CCE8CF;
+} */

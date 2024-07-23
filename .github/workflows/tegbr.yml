@@ -1,0 +1,43 @@
+name: TEGBR
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '58 23 * * *'  # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Install Dependencies and pdftk
+        run: |
+          pip install -r assets/requirements.txt
+          sudo apt-get install -y pdftk
+
+      - name: Generate PDF
+        run: |
+          python assets/tegbr.py
+          docker run -v ${{ github.workspace }}:/workdir -w /workdir yeslogic/prince:15.2 TEGBR.html --style assets/styles.css -o TEGBR_raw.pdf
+          pdftk TEGBR_raw.pdf dump_data_utf8 | grep -A1 Bookmark > bookmarks_raw.txt
+          python assets/bookmarkextract.py
+          pdftk TEGBR_raw.pdf cat 2-end output TEGBR_no_first_page.pdf
+          pdftk TEGBR_no_first_page.pdf update_info bookmarks.txt output TE_GBR_2024.pdf
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add TE_GBR_2024.pdf
+          git commit -m "Initial commit"
+          git push
